@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				heading: ['Inter', 'system-ui', 'sans-serif'],
+				body: ['Inter', 'system-ui', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -62,6 +66,15 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			spacing: {
+				'content': 'var(--space-content)',
+				'section': 'var(--space-section)',
+				'header': 'var(--header-height)',
+				'sidebar': 'var(--sidebar-width)',
+			},
+			maxWidth: {
+				'content': 'var(--content-width)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

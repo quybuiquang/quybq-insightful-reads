@@ -2,41 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* quy.bq Blog Design System - Social Analysis Blog
+   Sophisticated, minimalist design for deep reading experience
+   All colors MUST be HSL format */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    /* Core Blog Colors - Light Mode */
+    --background: 39 17% 94%;          /* #F1EFEC - Warm cream background */
+    --foreground: 0 0% 1%;             /* #030303 - Deep black text */
+    
+    --card: 39 17% 96%;                /* Slightly lighter card background */
+    --card-foreground: 0 0% 1%;       /* #030303 - Deep black on cards */
+    
+    --popover: 39 17% 94%;
+    --popover-foreground: 0 0% 1%;
+    
+    /* Blog Accent - Navy Blue */
+    --primary: 211 66% 21%;            /* #123458 - Professional navy */
+    --primary-foreground: 39 17% 94%;  /* Cream text on navy */
+    
+    /* Secondary Surfaces */
+    --secondary: 35 13% 82%;           /* #D4C9BE - Warm secondary */
+    --secondary-foreground: 0 0% 1%;
+    
+    /* Muted Elements */
+    --muted: 35 13% 85%;               /* Lighter muted background */
+    --muted-foreground: 0 0% 40%;      /* Softer text for metadata */
+    
+    /* Interactive Elements */
+    --accent: 211 66% 21%;             /* Same as primary for consistency */
+    --accent-foreground: 39 17% 94%;
+    
+    --destructive: 0 65% 51%;
+    --destructive-foreground: 39 17% 94%;
+    
+    /* Borders and Inputs */
+    --border: 35 13% 85%;              /* Subtle warm border */
+    --input: 35 13% 88%;
+    --ring: 211 66% 21%;               /* Navy focus ring */
+    
+    /* Design System Values */
+    --radius: 0.75rem;                 /* Slightly larger radius for modern feel */
+    
+    /* Blog-specific Design Tokens */
+    --content-width: 65ch;             /* Optimal reading line length */
+    --sidebar-width: 280px;            /* Fixed sidebar width */
+    --header-height: 80px;             /* Header height */
+    
+    /* Typography Scale */
+    --font-size-sm: 0.875rem;          /* 14px */
+    --font-size-base: 1.125rem;        /* 18px - optimized for reading */
+    --font-size-lg: 1.25rem;           /* 20px */
+    --font-size-xl: 1.5rem;            /* 24px */
+    --font-size-2xl: 2rem;             /* 32px */
+    --font-size-3xl: 2.5rem;           /* 40px */
+    
+    /* Spacing Scale */
+    --space-content: 2rem;             /* Content padding */
+    --space-section: 4rem;             /* Section spacing */
+    
+    /* Blog Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--primary)), hsl(211 66% 25%));
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +88,39 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Core Blog Colors - Dark Mode */
+    --background: 0 0% 1%;             /* #030303 - Deep black background */
+    --foreground: 39 17% 94%;          /* #F1EFEC - Warm cream text */
+    
+    --card: 0 0% 3%;                   /* Very dark card background */
+    --card-foreground: 39 17% 94%;     /* Cream text on dark cards */
+    
+    --popover: 0 0% 1%;
+    --popover-foreground: 39 17% 94%;
+    
+    /* Navy accent remains consistent */
+    --primary: 211 66% 21%;            /* #123458 - Same navy */
+    --primary-foreground: 39 17% 94%;  /* Cream text on navy */
+    
+    /* Secondary Surfaces - Dark */
+    --secondary: 0 0% 16%;             /* #2a2a2a - Warm dark secondary */
+    --secondary-foreground: 39 17% 94%;
+    
+    /* Muted Elements - Dark */
+    --muted: 0 0% 10%;                 /* Subtle dark background */
+    --muted-foreground: 0 0% 60%;      /* Lighter text for metadata */
+    
+    /* Interactive Elements */
+    --accent: 211 66% 21%;             /* Consistent navy accent */
+    --accent-foreground: 39 17% 94%;
+    
+    --destructive: 0 65% 51%;
+    --destructive-foreground: 39 17% 94%;
+    
+    /* Borders and Inputs - Dark */
+    --border: 0 0% 15%;                /* Subtle dark border */
+    --input: 0 0% 10%;
+    --ring: 211 66% 21%;               /* Navy focus ring */
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +138,61 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body leading-relaxed;
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+  }
+  
+  /* Typography Hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold text-foreground;
+    line-height: 1.2;
+  }
+  
+  h1 { font-size: var(--font-size-3xl); }
+  h2 { font-size: var(--font-size-2xl); }
+  h3 { font-size: var(--font-size-xl); }
+  h4 { font-size: var(--font-size-lg); }
+  
+  /* Reading optimization */
+  p {
+    margin-bottom: 1.5rem;
+    max-width: var(--content-width);
+  }
+  
+  /* Smooth transitions for theme switching */
+  *, *::before, *::after {
+    transition: var(--transition-fast);
+  }
+}
+
+@layer components {
+  /* Blog-specific component classes */
+  .content-container {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 var(--space-content);
+  }
+  
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+  
+  .blog-card {
+    @apply bg-card rounded-lg border border-border overflow-hidden;
+    transition: var(--transition-smooth);
+  }
+  
+  .blog-card:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px);
+  }
+  
+  .featured-image {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    width: 100%;
   }
 }
