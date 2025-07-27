@@ -101,6 +101,17 @@ export default function AdminLogin() {
               {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
+          
+          <div className="mt-6 text-center">
+            <p className="text-sm text-muted-foreground mb-2">
+              Chưa có tài khoản admin?
+            </p>
+            <Button variant="outline" size="sm" asChild>
+              <a href="/admin/setup">
+                Tạo tài khoản Admin
+              </a>
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>
