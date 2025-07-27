@@ -14,7 +14,136 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          created_at: string
+          id: string
+          name_en: string
+          name_vi: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name_en: string
+          name_vi: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name_en?: string
+          name_vi?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      comments: {
+        Row: {
+          author_email: string | null
+          author_name: string | null
+          content: string
+          created_at: string
+          id: string
+          post_id: string
+          status: string
+        }
+        Insert: {
+          author_email?: string | null
+          author_name?: string | null
+          content: string
+          created_at?: string
+          id?: string
+          post_id: string
+          status?: string
+        }
+        Update: {
+          author_email?: string | null
+          author_name?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          post_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      posts: {
+        Row: {
+          author_id: string
+          category_id: string
+          content_en: string | null
+          content_vi: string | null
+          created_at: string
+          featured_image_url: string | null
+          id: string
+          meta_description_en: string | null
+          meta_description_vi: string | null
+          meta_title_en: string | null
+          meta_title_vi: string | null
+          published_at: string | null
+          read_time: number | null
+          slug: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          category_id: string
+          content_en?: string | null
+          content_vi?: string | null
+          created_at?: string
+          featured_image_url?: string | null
+          id?: string
+          meta_description_en?: string | null
+          meta_description_vi?: string | null
+          meta_title_en?: string | null
+          meta_title_vi?: string | null
+          published_at?: string | null
+          read_time?: number | null
+          slug: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          category_id?: string
+          content_en?: string | null
+          content_vi?: string | null
+          created_at?: string
+          featured_image_url?: string | null
+          id?: string
+          meta_description_en?: string | null
+          meta_description_vi?: string | null
+          meta_title_en?: string | null
+          meta_title_vi?: string | null
+          published_at?: string | null
+          read_time?: number | null
+          slug?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
