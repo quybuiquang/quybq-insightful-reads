@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Moon, Sun, Menu, X, Globe } from 'lucide-react';
+import { Moon, Sun, Menu, X, Globe, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { SearchDialog } from '@/components/SearchDialog';
 import { useTheme } from './ThemeProvider';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const categories = [
   { name: 'Chính trị & Quan hệ quốc tế', href: '/politics' },
@@ -15,8 +17,8 @@ const categories = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [language, setLanguage] = useState('vi');
   const { theme, setTheme } = useTheme();
+  const { language, setLanguage } = useLanguage();
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
@@ -70,6 +72,13 @@ export function Header() {
 
           {/* Right side controls */}
           <div className="flex items-center space-x-2">
+            {/* Search */}
+            <SearchDialog>
+              <Button variant="ghost" size="sm">
+                <Search className="h-4 w-4" />
+              </Button>
+            </SearchDialog>
+
             {/* Language Toggle */}
             <Button
               variant="ghost"

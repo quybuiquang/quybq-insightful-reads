@@ -7,7 +7,7 @@ interface ArticleCardProps {
   category: string;
   readTime: string;
   publishedAt: string;
-  featuredImage?: string;
+  featuredImage?: string | null;
   href: string;
   featured?: boolean;
 }

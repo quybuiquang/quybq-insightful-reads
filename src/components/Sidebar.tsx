@@ -1,6 +1,8 @@
 import { Search, TrendingUp, Clock, Tag } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { SearchDialog } from '@/components/SearchDialog';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const recentPosts = [
   {
@@ -47,30 +49,31 @@ const trendingTopics = [
 ];
 
 export function Sidebar() {
+  const { language } = useLanguage();
+
   return (
     <aside className="w-sidebar space-y-8">
       {/* Search */}
       <div className="bg-card rounded-lg p-6 border border-border">
         <h3 className="font-heading font-semibold text-foreground mb-4 flex items-center">
           <Search className="h-5 w-5 mr-2" />
-          Tìm kiếm
+          {language === 'vi' ? 'Tìm kiếm' : 'Search'}
         </h3>
-        <div className="relative">
-          <Input
-            placeholder="Tìm kiếm bài viết..."
-            className="pr-10"
-          />
-          <Button variant="ghost" size="sm" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 p-0">
+        <SearchDialog>
+          <Button variant="outline" className="w-full justify-start">
             <Search className="h-4 w-4" />
+            <span className="ml-2">
+              {language === 'vi' ? 'Tìm kiếm bài viết...' : 'Search articles...'}
+            </span>
           </Button>
-        </div>
+        </SearchDialog>
       </div>
 
       {/* Recent Posts */}
       <div className="bg-card rounded-lg p-6 border border-border">
         <h3 className="font-heading font-semibold text-foreground mb-4 flex items-center">
           <Clock className="h-5 w-5 mr-2" />
-          Bài viết gần đây
+          {language === 'vi' ? 'Bài viết gần đây' : 'Recent Posts'}
         </h3>
         <div className="space-y-4">
           {recentPosts.map((post) => (
@@ -90,7 +93,7 @@ export function Sidebar() {
       <div className="bg-card rounded-lg p-6 border border-border">
         <h3 className="font-heading font-semibold text-foreground mb-4 flex items-center">
           <TrendingUp className="h-5 w-5 mr-2" />
-          Chủ đề nổi bật
+          {language === 'vi' ? 'Chủ đề nổi bật' : 'Trending Topics'}
         </h3>
         <div className="space-y-3">
           {trendingTopics.map((topic) => (
@@ -108,7 +111,7 @@ export function Sidebar() {
       <div className="bg-card rounded-lg p-6 border border-border">
         <h3 className="font-heading font-semibold text-foreground mb-4 flex items-center">
           <Tag className="h-5 w-5 mr-2" />
-          Thẻ phổ biến
+          {language === 'vi' ? 'Thẻ phổ biến' : 'Popular Tags'}
         </h3>
         <div className="flex flex-wrap gap-2">
           {popularTags.map((tag) => (
@@ -127,15 +130,18 @@ export function Sidebar() {
       {/* Newsletter Signup */}
       <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-6 border border-primary/20">
         <h3 className="font-heading font-semibold text-foreground mb-2">
-          Đăng ký nhận tin
+          {language === 'vi' ? 'Đăng ký nhận tin' : 'Newsletter'}
         </h3>
         <p className="text-sm text-muted-foreground mb-4">
-          Nhận thông báo về các bài phân tích mới nhất từ quy.bq
+          {language === 'vi' 
+            ? 'Nhận thông báo về các bài phân tích mới nhất từ quy.bq'
+            : 'Get notified about the latest analysis from quy.bq'
+          }
         </p>
         <div className="space-y-3">
-          <Input placeholder="Email của bạn" />
+          <Input placeholder={language === 'vi' ? 'Email của bạn' : 'Your email'} />
           <Button className="w-full">
-            Đăng ký
+            {language === 'vi' ? 'Đăng ký' : 'Subscribe'}
           </Button>
         </div>
       </div>

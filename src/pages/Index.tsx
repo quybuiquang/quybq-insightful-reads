@@ -1,7 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { ArticleCard } from '@/components/ArticleCard';
 import { Sidebar } from '@/components/Sidebar';
+import { usePosts } from '@/hooks/usePosts';
+import { useLanguage } from '@/hooks/useLanguage';
 import { ArrowRight, TrendingUp, Clock, Eye } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 // Import featured images
 import heroImage from '@/assets/hero-analysis.jpg';
@@ -59,7 +62,26 @@ const recentArticles = [
 ];
 
 const Index = () => {
+  const { data: posts, isLoading } = usePosts('published');
+  const { language } = useLanguage();
+
+  const featuredPost = posts?.[0];
+  const recentPosts = posts?.slice(1, 5) || [];
+
   return (
+    <>
+      <Helmet>
+        <title>quy.bq - {language === 'vi' ? 'Phân tích xã hội chuyên sâu' : 'In-depth Social Analysis'}</title>
+        <meta 
+          name="description" 
+          content={language === 'vi' 
+            ? 'Blog cá nhân chia sẻ phân tích xã hội chuyên sâu, góc nhìn đa chiều về chính trị, kinh tế, văn hóa và đời sống.'
+            : 'Personal blog sharing in-depth social analysis, multi-dimensional perspectives on politics, economics, culture and life.'
+          } 
+        />
+        <link rel="canonical" href={window.location.origin} />
+      </Helmet>
+
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-background to-secondary/30 border-b border-border">
@@ -67,29 +89,40 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl lg:text-5xl font-heading font-bold text-foreground mb-6 leading-tight">
-                Phân tích xã hội 
-                <span className="text-primary"> chuyên sâu</span>
+                {language === 'vi' ? (
+                  <>
+                    Phân tích xã hội 
+                    <span className="text-primary"> chuyên sâu</span>
+                  </>
+                ) : (
+                  <>
+                    In-depth 
+                    <span className="text-primary"> Social Analysis</span>
+                  </>
+                )}
               </h1>
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Chia sẻ góc nhìn đa chiều về chính trị, kinh tế, văn hóa và những vấn đề 
-                quan trọng của thời đại thông qua các bài phân tích có chiều sâu và dữ liệu thực tế.
+                {language === 'vi' 
+                  ? 'Chia sẻ góc nhìn đa chiều về chính trị, kinh tế, văn hóa và những vấn đề quan trọng của thời đại thông qua các bài phân tích có chiều sâu và dữ liệu thực tế.'
+                  : 'Sharing multi-dimensional perspectives on politics, economics, culture and important issues of our time through in-depth analysis and real data.'
+                }
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild>
                   <a href="#latest-articles">
-                    Khám phá bài viết
+                    {language === 'vi' ? 'Khám phá bài viết' : 'Explore Articles'}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </a>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <a href="/about">Về tác giả</a>
+                  <a href="/about">{language === 'vi' ? 'Về tác giả' : 'About Author'}</a>
                 </Button>
               </div>
             </div>
             <div className="relative">
               <img
                 src={heroImage}
-                alt="Phân tích xã hội"
+                alt={language === 'vi' ? 'Phân tích xã hội' : 'Social Analysis'}
                 className="rounded-lg shadow-xl w-full h-auto"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent rounded-lg"></div>
@@ -107,21 +140,27 @@ const Index = () => {
                 <TrendingUp className="h-8 w-8 text-primary mr-2" />
                 <span className="text-3xl font-heading font-bold text-foreground">150+</span>
               </div>
-              <p className="text-muted-foreground">Bài phân tích chuyên sâu</p>
+              <p className="text-muted-foreground">
+                {language === 'vi' ? 'Bài phân tích chuyên sâu' : 'In-depth Articles'}
+              </p>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center mb-2">
                 <Eye className="h-8 w-8 text-primary mr-2" />
                 <span className="text-3xl font-heading font-bold text-foreground">50K+</span>
               </div>
-              <p className="text-muted-foreground">Lượt đọc hàng tháng</p>
+              <p className="text-muted-foreground">
+                {language === 'vi' ? 'Lượt đọc hàng tháng' : 'Monthly Readers'}
+              </p>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center mb-2">
                 <Clock className="h-8 w-8 text-primary mr-2" />
                 <span className="text-3xl font-heading font-bold text-foreground">12</span>
               </div>
-              <p className="text-muted-foreground">Phút đọc trung bình</p>
+              <p className="text-muted-foreground">
+                {language === 'vi' ? 'Phút đọc trung bình' : 'Average Read Time'}
+              </p>
             </div>
           </div>
         </div>
@@ -135,37 +174,81 @@ const Index = () => {
             <main className="flex-1">
               <div className="mb-8">
                 <h2 className="text-3xl font-heading font-bold text-foreground mb-2">
-                  Bài viết nổi bật
+                  {language === 'vi' ? 'Bài viết nổi bật' : 'Featured Articles'}
                 </h2>
                 <p className="text-muted-foreground">
-                  Những phân tích mới nhất về các vấn đề xã hội quan trọng
+                  {language === 'vi' 
+                    ? 'Những phân tích mới nhất về các vấn đề xã hội quan trọng'
+                    : 'Latest analysis on important social issues'
+                  }
                 </p>
               </div>
 
               {/* Featured Article */}
-              <div className="mb-12">
-                <ArticleCard {...featuredArticle} />
-              </div>
+              {isLoading ? (
+                <div className="text-center py-12">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                  <p className="text-muted-foreground">
+                    {language === 'vi' ? 'Đang tải...' : 'Loading...'}
+                  </p>
+                </div>
+              ) : featuredPost ? (
+                <div className="mb-12">
+                  <ArticleCard
+                    title={featuredPost.title}
+                    excerpt={language === 'vi' ? featuredPost.content_vi?.substring(0, 200) + '...' : featuredPost.content_en?.substring(0, 200) + '...'}
+                    category={language === 'vi' ? featuredPost.categories.name_vi : featuredPost.categories.name_en}
+                    readTime={`${featuredPost.read_time} ${language === 'vi' ? 'phút đọc' : 'min read'}`}
+                    publishedAt={new Date(featuredPost.published_at!).toLocaleDateString(
+                      language === 'vi' ? 'vi-VN' : 'en-US',
+                      { year: 'numeric', month: 'long', day: 'numeric' }
+                    )}
+                    featuredImage={featuredPost.featured_image_url}
+                    href={`/posts/${featuredPost.slug}`}
+                    featured={true}
+                  />
+                </div>
+              ) : null}
 
               {/* Recent Articles Grid */}
               <div className="mb-8">
                 <h3 className="text-2xl font-heading font-bold text-foreground mb-6">
-                  Bài viết gần đây
+                  {language === 'vi' ? 'Bài viết gần đây' : 'Recent Articles'}
                 </h3>
-                <div className="article-grid">
-                  {recentArticles.map((article, index) => (
-                    <ArticleCard key={index} {...article} />
-                  ))}
-                </div>
+                {recentPosts.length > 0 ? (
+                  <div className="article-grid">
+                    {recentPosts.map((post) => (
+                      <ArticleCard
+                        key={post.id}
+                        title={post.title}
+                        excerpt={language === 'vi' ? post.content_vi?.substring(0, 150) + '...' : post.content_en?.substring(0, 150) + '...'}
+                        category={language === 'vi' ? post.categories.name_vi : post.categories.name_en}
+                        readTime={`${post.read_time} ${language === 'vi' ? 'phút đọc' : 'min read'}`}
+                        publishedAt={new Date(post.published_at!).toLocaleDateString(
+                          language === 'vi' ? 'vi-VN' : 'en-US',
+                          { year: 'numeric', month: 'long', day: 'numeric' }
+                        )}
+                        featuredImage={post.featured_image_url}
+                        href={`/posts/${post.slug}`}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12 text-muted-foreground">
+                    <p>{language === 'vi' ? 'Chưa có bài viết nào' : 'No articles yet'}</p>
+                  </div>
+                )}
               </div>
 
               {/* Load More */}
-              <div className="text-center">
-                <Button variant="outline" size="lg">
-                  Xem thêm bài viết
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
+              {posts && posts.length > 5 && (
+                <div className="text-center">
+                  <Button variant="outline" size="lg">
+                    {language === 'vi' ? 'Xem thêm bài viết' : 'Load More Articles'}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              )}
             </main>
 
             {/* Sidebar */}
@@ -174,6 +257,7 @@ const Index = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 
