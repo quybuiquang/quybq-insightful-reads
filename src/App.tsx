@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import PostDetail from "./pages/PostDetail";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminSetupPage from "./pages/AdminSetupPage";
 import { AdminRoute } from "@/components/AdminRoute";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
             <Routes>
               {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/setup" element={<AdminSetupPage />} />
               <Route 
                 path="/admin" 
                 element={
